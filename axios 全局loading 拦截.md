@@ -110,7 +110,7 @@ loading 层 css 样式:
 
 ```
 
-使用: 要么用 Promise.all, 要么用 promise.then 如果多个请求都用 aysnc/await 则仍然会出现多次loading
+使用: 要么用 Promise.all, 要么用 promise.then 如果多个请求都用 aysnc/await 则仍然会出现多次loading; 如果多个请求之间有强的依赖顺序,则最好手动去控制loading
 ```js
 import React, { useEffect } from 'react';
 import axios from './request';
