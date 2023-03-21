@@ -1,10 +1,17 @@
 ```js
     const handleExport = async (params) => {
-        const response = await Axios.post('/api/xxxx/export_file', {
-            ...params
-        }, { responseType: 'blob' })
-        const blob = new Blob([response.data]);
-        FileSaver.saveAs(blob, `${filename}.xlsx`)
+        try{
+            const response = await Axios.post('/api/xxxx/export_file', {
+                ...params
+            }, { responseType: 'blob' })
+            const blob = new Blob([response.data]);
+            FileSaver.saveAs(blob, `${filename}.xlsx`)
+         } catch(error){
+             if (error.response && error.response.data) {
+                const msg = await error.response.data.text();// 报错了打印后端返回的错误
+                message.error(msg);
+             }
+         }
     }
 
     const handleImport = async ({ file }) => {
